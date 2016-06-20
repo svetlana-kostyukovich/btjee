@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html">
+<h:head>
+    <title>Web app Brooker</title>
+</h:head>
+<body>
+    <f:view>
+        <h:outputStylesheet
+            library="css"
+            name="style.css" />
+        <ui:composition>
+            <div>
+                <h:panelGrid
+                    border="1"
+                    columns="4"
+                    styleClass="zui-table zui-table-zebra zui-table-horizontal">
+                    <h:link
+                        value="Customer Details"
+                        outcome="customer" />
+                    <h:link
+                        value="All CUstomers"
+                        outcome="allcustomers" />
+                    <h:link
+                        value="Stocks"
+                        outcome="stocks" />
+                    <h:link
+                        value="Portfolio"
+                        outcome="portfolio" />
+                </h:panelGrid>
+            </div>
+        </ui:composition>
+    </f:view>
+</body>
+</html>
