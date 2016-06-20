@@ -29,7 +29,7 @@ public class CustomerManagedBean implements Serializable {
 
 	}
 
-	@ManagedProperty(value = "customer")
+	@ManagedProperty(value = "#{customer}")
 	private Customer customer;
 	private static final long serialVersionUID = -5987863306439575163L;
 	private Logger logger = Logger.getLogger(this.getClass().getName());

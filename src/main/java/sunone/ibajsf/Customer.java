@@ -27,6 +27,10 @@ public class Customer implements Serializable {
 		this.addr = addr;
 	}
 
+	public void setId(String id) {
+		this.id = id;
+	}
+
 	public Customer(String id) {
 		this(id, null, null);
 	}
