@@ -30,6 +30,8 @@
 									<h:inputText id="name"
 										value="#{customerManagedBean.customer.name}" size="20"
 										label="name">
+										<!-- Validacia v bine smotret' pole name anotaciy, eto po JSR,
+										spornii moment(imho), esli validator kontroler to etim mi vinesem kontroler v model' -->
 										<f:validateBean />
 									</h:inputText>
 									<h:message for="name" styleClass="errorMessage" />
@@ -39,6 +41,7 @@
 										<f:ajax execute="id" render="outputAjax name address messages"
 											listener="#{customerManagedBean.ajaxPerformGetCustomer}"
 											event="keyup" />
+											<!-- Svoi validator -->
 										<!--  <f:validator
                                 validatorId="customerIdValidator" />  -->
 									</h:inputText>
@@ -69,6 +72,8 @@
 								type="submit" action="#{customerManagedBean.updateCustomer}" />
 							<h:commandButton styleClass="dark_button " value="Add Customer"
 								type="submit" action="#{customerManagedBean.addCustomer}" />
+								
+								<!-- Variant Ajax dlia knopki -->
 							<h:commandButton styleClass="dark_button "
 								value="Delete Customer" type="submit">
 								<f:ajax listener="#{customerManagedBean.deleteCustomer}" 

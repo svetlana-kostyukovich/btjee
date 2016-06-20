@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.NoneScoped;
+import javax.validation.constraints.Size;
 
 @ManagedBean(name = "customer")
 @NoneScoped
@@ -17,6 +18,7 @@ public class Customer implements Serializable {
 	private static final long serialVersionUID = -3853143984225856420L;
 	private Logger logger = Logger.getLogger(this.getClass().getName());
 	private String id = null;
+	@Size(min = 2, message = "Must be min 2 characters")
 	private String name = null;
 	private String addr = null;
 

@@ -11,7 +11,7 @@
 	<name>ibajsf</name>
 
 	<properties>
-		
+
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
@@ -22,6 +22,12 @@
 		<local.glassfish.passfile>
 			${local.glassfish.home}/domains/${local.glassfish.domain}/config/domain-passwords
 		</local.glassfish.passfile>
+
+		<!-- <local.glassfish.home>C:\\glassfish4\\glassfish</local.glassfish.home> 
+			<local.glassfish.user>admin</local.glassfish.user> 
+			<local.glassfish.domain>domain1</local.glassfish.domain> 
+			<local.glassfish.passfile> ${local.glassfish.home}\\domains\\${local.glassfish.domain}\\config\\domain-passwords 
+			</local.glassfish.passfile> -->
 	</properties>
 
 	<dependencies>
