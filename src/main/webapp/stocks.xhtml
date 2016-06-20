@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+
+</h:head>
+<body>
+	<f:view>
+		<h:outputStylesheet library="css" name="style.css" />
+
+		<ui:composition template="/templates/template.xhtml">
+			<ui:define name="content">
+				<h:messages id="messages" globalOnly="true" />
+				<h:dataTable border="1" value="#{stockManagedBean.allStocks}"
+					var="s" styleClass="zui-table zui-table-zebra zui-table-horizontal">
+					<h:column id="column1">
+						<f:facet name="header">
+							<h:outputText value="Symbol" />
+						</f:facet>
+						<h:outputText value="#{s.symbol}" />
+					</h:column>
+					<h:column id="column2">
+						<f:facet name="header">
+							<h:outputText value="Price" />
+						</f:facet>
+						<h:outputText value="#{s.price}" />
+					</h:column>
+				</h:dataTable>
+			</ui:define>
+		</ui:composition>
+	</f:view>
+</body>
+</html>

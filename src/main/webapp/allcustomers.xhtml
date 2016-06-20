@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:body>
+
+	<ui:composition template="/templates/template.xhtml">
+
+		<ui:define name="content">
+			<h:messages id="messages" globalOnly="true" />
+			<h:dataTable border="1"
+				value="#{allCustomersManagedBean.allCustomers}" var="c"
+				styleClass="zui-table zui-table-zebra zui-table-horizontal">
+				<h:column id="column1">
+					<f:facet name="header">
+						<h:outputText value="Customer ID" />
+					</f:facet>
+					<h:outputText value="#{c.id}" />
+				</h:column>
+				<h:column id="column2">
+					<f:facet name="header">
+						<h:outputText value="Name" />
+					</f:facet>
+					<h:outputText value="#{c.name}" />
+				</h:column>
+				<h:column id="column2">
+					<f:facet name="header">
+						<h:outputText value="Address" />
+					</f:facet>
+					<h:outputText value="#{c.addr}" />
+				</h:column>
+			</h:dataTable>
+		</ui:define>
+	</ui:composition>
+</h:body>
+
+</html>
