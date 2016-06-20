@@ -11,9 +11,18 @@
 			<ui:insert name="header">
 				<ui:include src="/templates/header.xhtml"></ui:include>
 			</ui:insert>
-			<ui:insert name="content">
-				<ui:include src="/templates/content.xhtml"></ui:include>
-			</ui:insert>
+			<h:panelGrid border="0" columns="2">
+				<h:panelGroup>
+					<ui:insert name="content">
+						<ui:include src="/templates/content.xhtml"></ui:include>
+					</ui:insert>
+				</h:panelGroup>
+				<h:panelGroup>
+					<ui:insert name="content2">
+						<ui:include src="/templates/content2.xhtml"></ui:include>
+					</ui:insert>
+				</h:panelGroup>
+			</h:panelGrid>
 			<ui:insert name="footer">
 				<ui:include src="/templates/footer.xhtml"></ui:include>
 			</ui:insert>

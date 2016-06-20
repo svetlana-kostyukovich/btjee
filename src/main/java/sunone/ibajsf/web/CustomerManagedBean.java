@@ -8,7 +8,7 @@ import javax.annotation.PreDestroy;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 
@@ -18,7 +18,7 @@ import sunone.ibajsf.BrokerModelImpl;
 import sunone.ibajsf.Customer;
 
 @ManagedBean
-@SessionScoped
+@RequestScoped
 public class CustomerManagedBean implements Serializable {
 
 	/**
@@ -55,8 +55,10 @@ public class CustomerManagedBean implements Serializable {
 
 	public void ajaxPerformGetCustomer(final AjaxBehaviorEvent event) {
 
-		customer = findCustomer();
 		logger.info("ajax finding customer");
+		if (!(findCustomer())) {
+			customer = null;
+		}
 
 	}
 
@@ -79,14 +81,15 @@ public class CustomerManagedBean implements Serializable {
 		try {
 			brokerModel.deleteCustomer(customer);
 			facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO,
-					String.format("Customer %s deleted", customer.toString()), "customer deleted");
+					String.format("%s - deleted", customer.toString()), "  deleted");
+			FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+			customer = null;
 
 		} catch (NullPointerException | BrokerException e) {
 			facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Unable delete customer" + customer.toString(),
 					e.getMessage());
-
+			FacesContext.getCurrentInstance().addMessage(null, facesMessage);
 		}
-		FacesContext.getCurrentInstance().addMessage(null, facesMessage);
 
 		logger.info("delete customer complete");
 	}
@@ -108,11 +111,13 @@ public class CustomerManagedBean implements Serializable {
 
 	public void getCustomerFromDb() {
 		logger.info("get customer");
-		findCustomer();
+		if (!(findCustomer())) {
+			customer = null;
+		}
 		logger.info("get customer complete");
 	}
 
-	private Customer findCustomer() {
+	private boolean findCustomer() {
 
 		FacesMessage facesMessage = new FacesMessage();
 		try {
@@ -135,6 +140,7 @@ public class CustomerManagedBean implements Serializable {
 				}
 
 			}
+			return true;
 		} catch (
 
 		BrokerException e1) {
@@ -143,7 +149,7 @@ public class CustomerManagedBean implements Serializable {
 
 		}
 		FacesContext.getCurrentInstance().addMessage(null, facesMessage);
-		return customer;
+		return false;
 
 	}
 }

@@ -1,117 +1,123 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html
-    xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:ui="http://java.sun.com/jsf/facelets"
-    xmlns:f="http://java.sun.com/jsf/core"
-    xmlns:h="http://java.sun.com/jsf/html">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
 <h:head></h:head>
 <h:body>
-    <f:view>
-        <h:outputStylesheet
-            library="css"
-            name="style.css" />
-        <br />
-        <ui:composition template="/templates/template.xhtml">
-            <ui:define name="content">
-                <h:form>
-                    <h:messages
-                        id="messages"
-                        globalOnly="true" />
-                    <br />
-                    <h:panelGrid
-                        border="0"
-                        columns="3">
-                        <h:panelGroup>
-                            <h:panelGrid
-                                columns="3"
-                                columnClasses="rightAlign,leftAlign">
-                                <h:outputText value="Customer Name"></h:outputText>
-                                <h:inputText
-                                    id="name"
-                                    value="#{customerManagedBean.customer.name}"
-                                    size="20"
-                                    label="name">
-                                    <f:validateBean />
-                                </h:inputText>
-                                <h:message
-                                    for="name"
-                                    styleClass="errorMessage" />
-                                <h:outputText value="Customer Identity"></h:outputText>
-                                <h:inputText
-                                    id="id"
-                                    value="#{customerManagedBean.customer.id}"
-                                    size="20"
-                                    label="id">
-                                    <f:ajax
-                                        execute="id"
-                                        render="outputAjax name address messages"
-                                        listener="#{customerManagedBean.ajaxPerformGetCustomer}"
-                                        event="keyup" />
-                                    <!--  <f:validator
+	<f:view>
+		<h:outputStylesheet library="css" name="style.css" />
+		<br />
+		<ui:composition template="/templates/template.xhtml">
+
+
+			<ui:define name="content">
+
+
+
+				<h:panelGrid border="0" columns="3">
+
+					<h:form>
+						<h:messages id="messages" globalOnly="true" />
+						<br />
+						
+						<h:panelGrid border="0" columns="3">
+							<h:panelGroup>
+							<h:message  for="info" />
+						
+								<h:panelGrid columns="3" columnClasses="rightAlign,leftAlign">
+									<h:outputText value="Customer Name"></h:outputText>
+									<h:inputText id="name"
+										value="#{customerManagedBean.customer.name}" size="20"
+										label="name">
+										<f:validateBean />
+									</h:inputText>
+									<h:message for="name" styleClass="errorMessage" />
+									<h:outputText value="Customer Identity"></h:outputText>
+									<h:inputText id="id" value="#{customerManagedBean.customer.id}"
+										size="20" label="id">
+										<f:ajax execute="id" render="outputAjax name address messages"
+											listener="#{customerManagedBean.ajaxPerformGetCustomer}"
+											event="keyup" />
+										<!--  <f:validator
                                 validatorId="customerIdValidator" />  -->
-                                </h:inputText>
-                                <h:message
-                                    for="id"
-                                    styleClass="errorMessage" />
-                                <h:outputText value="Customer Address"></h:outputText>
-                                <h:inputText
-                                    id="address"
-                                    value="#{customerManagedBean.customer.addr}"
-                                    size="20"
-                                    label="address">
-                                    <f:validateLength
-                                        minimum="5"
-                                        maximum="120" />
-                                </h:inputText>
-                                <h:message
-                                    for="address"
-                                    styleClass="errorMessage" />
-                            </h:panelGrid>
-                        </h:panelGroup>
-                        <h:panelGroup id="outputAjax">
-                            <h:panelGrid
-                                border="0"
-                                columns="0">
-                                <h:outputText
-                                    value="#{customerManagedBean.customer.name}" />
-                                <h:outputText
-                                    value="#{customerManagedBean.customer.id}" />
-                                <h:outputText
-                                    value="#{customerManagedBean.customer.addr}" />
-                            </h:panelGrid>
-                        </h:panelGroup>
-                    </h:panelGrid>
-                    <h:panelGrid
-                        border="1"
-                        columns="2"
-                        styleClass="zui-table zui-table-zebra zui-table-horizontal">
-                        <h:commandButton
-                            styleClass="dark_button"
-                            value="Get Customer"
-                            type="submit"
-                            action="#{customerManagedBean.getCustomerFromDb}">
-                        </h:commandButton>
-                        <h:commandButton
-                            styleClass="dark_button"
-                            value="Update Customer"
-                            type="submit"
-                            action="#{customerManagedBean.updateCustomer}" />
-                        <h:commandButton
-                            styleClass="dark_button "
-                            value="Add Customer"
-                            type="submit"
-                            action="#{customerManagedBean.addCustomer}" />
-                        <h:commandButton
-                            styleClass="dark_button "
-                            value="Delete Customer"
-                            type="submit"
-                            actionListener="#{customerManagedBean.deleteCustomer}">
-                            <f:ajax render="form"/>
-                        </h:commandButton>
-                    </h:panelGrid>
-                </h:form>
-            </ui:define>
-        </ui:composition>
-    </f:view>
+									</h:inputText>
+									<h:message for="id" styleClass="errorMessage" />
+									<h:outputText value="Customer Address"></h:outputText>
+									<h:inputText id="address"
+										value="#{customerManagedBean.customer.addr}" size="20"
+										label="address">
+										<f:validateLength minimum="5" maximum="120" />
+									</h:inputText>
+									<h:message for="address" styleClass="errorMessage" />
+								</h:panelGrid>
+							</h:panelGroup>
+							<h:panelGroup id="outputAjax">
+								<h:panelGrid border="0" columns="0">
+									<h:outputText value="#{customerManagedBean.customer.name}" />
+									<h:outputText value="#{customerManagedBean.customer.id}" />
+									<h:outputText value="#{customerManagedBean.customer.addr}" />
+								</h:panelGrid>
+							</h:panelGroup>
+						</h:panelGrid>
+						<h:panelGrid border="1" columns="2"
+							styleClass="zui-table zui-table-zebra zui-table-horizontal">
+							<h:commandButton styleClass="dark_button" value="Get Customer"
+								type="submit" action="#{customerManagedBean.getCustomerFromDb}">
+							</h:commandButton>
+							<h:commandButton styleClass="dark_button" value="Update Customer"
+								type="submit" action="#{customerManagedBean.updateCustomer}" />
+							<h:commandButton styleClass="dark_button " value="Add Customer"
+								type="submit" action="#{customerManagedBean.addCustomer}" />
+							<h:commandButton styleClass="dark_button "
+								value="Delete Customer" type="submit">
+								<f:ajax listener="#{customerManagedBean.deleteCustomer}" 
+									render="customersLeftTab @form" execute="@all" />
+							</h:commandButton>
+						</h:panelGrid>
+					</h:form>
+					<h:panelGroup>
+
+						<h:dataTable border="1" id="customersLeftTab"
+							value="#{allCustomersManagedBean.allCustomers}" var="c"
+							styleClass="zui-table zui-table-zebra zui-table-horizontal">
+							<h:column id="column1">
+								<f:facet name="header">
+									<h:outputText value="Customer ID" />
+								</f:facet>
+								<h:outputText value="#{c.id}" />
+							</h:column>
+							<h:column id="column2">
+								<f:facet name="header">
+									<h:outputText value="Name" />
+								</f:facet>
+								<h:outputText value="#{c.name}" />
+							</h:column>
+							<h:column id="column3">
+								<f:facet name="header">
+									<h:outputText value="Address" />
+								</f:facet>
+								<h:outputText value="#{c.addr}" />
+							</h:column>
+						</h:dataTable>
+					</h:panelGroup>
+
+				</h:panelGrid>
+
+
+
+
+
+
+
+			</ui:define>
+
+
+
+
+
+
+		</ui:composition>
+	</f:view>
 </h:body>
 </html>
