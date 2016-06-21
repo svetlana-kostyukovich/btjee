@@ -19,6 +19,9 @@ mvn clean package glassfish:redeploy
  
  и да было бы неплохо если что то добавите :)
  https://habrahabr.ru/post/125999/
+ _________________________________
+ 21.06.2016
+  - simple branch added (without ajax fields)
  
  
  
