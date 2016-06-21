@@ -10,7 +10,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.event.AjaxBehaviorEvent;
 
 import sunone.ibajsf.BrokerException;
 import sunone.ibajsf.BrokerModel;
@@ -53,26 +52,18 @@ public class CustomerManagedBean implements Serializable {
 		this.customer = customer;
 	}
 
-	public void ajaxPerformGetCustomer(final AjaxBehaviorEvent event) {
-
-		logger.info("ajax finding customer");
-		if (!(findCustomer())) {
-			customer = null;
-		}
-
-	}
-
 	public void addCustomer() {
 		logger.info("add customer");
 
 		try {
 			brokerModel.addCustomer(customer);
+			logger.info("add customer complete");
 		} catch (BrokerException e) {
 			FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR,
 					"Problem with adding customer to DB " + customer.toString(), e.getMessage());
 			FacesContext.getCurrentInstance().addMessage(null, facesMessage);
 		}
-		logger.info("add customer complete");
+
 	}
 
 	public void deleteCustomer() {
@@ -80,9 +71,11 @@ public class CustomerManagedBean implements Serializable {
 		FacesMessage facesMessage;
 		try {
 			brokerModel.deleteCustomer(customer);
+			logger.info("delete customer complete");
 			facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO,
 					String.format("%s - deleted", customer.toString()), "  deleted");
 			FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+			// zanullt' chto bi ybit' Nonescoped Bean
 			customer = null;
 
 		} catch (NullPointerException | BrokerException e) {
@@ -91,7 +84,6 @@ public class CustomerManagedBean implements Serializable {
 			FacesContext.getCurrentInstance().addMessage(null, facesMessage);
 		}
 
-		logger.info("delete customer complete");
 	}
 
 	public void updateCustomer() {
@@ -99,6 +91,7 @@ public class CustomerManagedBean implements Serializable {
 		FacesMessage facesMessage;
 		try {
 			brokerModel.updateCustomer(customer);
+			logger.info("update customer complete");
 			facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO,
 					String.format("Customer %s deleted", customer.toString()), "customer updated");
 		} catch (BrokerException e) {
@@ -106,27 +99,28 @@ public class CustomerManagedBean implements Serializable {
 					e.getMessage());
 			FacesContext.getCurrentInstance().addMessage(null, facesMessage);
 		}
-		logger.info("update customer complete");
+
 	}
 
 	public void getCustomerFromDb() {
 		logger.info("get customer");
 		if (!(findCustomer())) {
 			customer = null;
+		} else {
+			logger.info("get customer complete");
 		}
-		logger.info("get customer complete");
+
 	}
 
 	private boolean findCustomer() {
 
-		FacesMessage facesMessage = new FacesMessage();
+		FacesMessage facesMessage;
 		try {
 			for (Customer cust : brokerModel.getAllCustomers()) {
 				if (cust.getId().equalsIgnoreCase(customer.getId())) {
 					customer = cust;
 					facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO, "Recieved from DB", " recieved");
 					break;
-
 				}
 				if (cust.getName().equalsIgnoreCase(customer.getName())) {
 					customer = cust;
@@ -140,7 +134,9 @@ public class CustomerManagedBean implements Serializable {
 				}
 
 			}
+			// potestit' nado tyt bydet li catch errora ili typo true vernet
 			return true;
+
 		} catch (
 
 		BrokerException e1) {

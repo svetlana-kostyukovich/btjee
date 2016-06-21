@@ -2,9 +2,11 @@ package sunone.ibajsf;
 
 import java.io.Serializable;
 
-import javax.inject.Named;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.NoneScoped;
 
-@Named
+@ManagedBean
+@NoneScoped
 public class CustomerShare implements Serializable {
 
 	/**
