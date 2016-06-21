@@ -9,8 +9,10 @@
 деплой как мавен проекта сразу в Глассфиш
 (нужно настраивать пути до Глассфиша в pom.xml- версия для виндовс закоментирована, 
 вариант для линукса закоментить или удалить)
-mvn clean package glassfish:redeploy
+mvn clean package glassfish:redeploy (если уже есть задеплоеное, в ином случае мавен ругается)
+mvn clean package glassfish:deploy
  деплоится сюда ---> http://localhost:8080/ibajsf/
+ (поменять можно в pom.xml - тег <finalName>)
  
  Скоупы бинов смотрите сами - можно и другие
  
